@@ -23,13 +23,30 @@ data<-rbind(traindata,testdata)
 ...
 ```
 
-Extracts only the measurements on the mean and standard deviation for each measurement. 
-Uses descriptive activity names to name the activities in the data set
-Appropriately labels the data set with descriptive variable names. 
-From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+Extracts only the measurements on the mean and standard deviation for each measurement. grep function is used to search for column names with mean and std.
 
-```{r, echo=FALSE}
-plot(cars)
+```{r}
+#the following line is just an example to read data, NOT the full script, please refer to run_analysis.R
+data<-data[,c(1,2,grep("mean",colnames),grep("std",colnames))]
 ```
 
+Uses descriptive activity names to name the activities in the data set. Descriptive names are loaded from features.txt and then assigned to the dataset.
+```{r}
+#the following line is just an example to read data, NOT the full script, please refer to run_analysis.R
+colnames<-read.table("./data/UCI HAR Dataset/features.txt",sep="")
+...
+names(data)<-colnames
+```
+Appropriately labels the data set with descriptive variable names. Variable names are loaded from activity_labels file.
+```{r}
+#the following line is just an example to read data, NOT the full script, please refer to run_analysis.R
+names(act_label)<-c("label","activity")
+...
+```
+Then A second, independent tidy data set with the average of each variable for each activity and each subject will be created. Then the final dataset are written out as a txt file with row.name = FALSE option.
+```{r}
+#the following line is just an example to read data, NOT the full script, please refer to run_analysis.R
+...
+write.table(data2.T, file = "tidydataset.txt",row.name=FALSE)
+```
 
