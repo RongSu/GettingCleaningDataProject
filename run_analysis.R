@@ -37,9 +37,6 @@ act_label<-read.table("./data/UCI HAR Dataset/activity_labels.txt")
 names(act_label)<-c("label","activity")
 data$activity<-factor(data$activity,labels=act_label$activity,levels=act_label$label)
 
-write.table(data, file = "dataset.txt",row.name=FALSE)
-
-
 
 #creat data2 as independent tidy data set with the average of each variable for each 
 #activity and each subject.
@@ -55,5 +52,5 @@ activity<-gsub("[0-9*.]","",nametmp)
 activity
 subjid
 data2.T<-data.frame(subjid,activity,data2.T)
-write.table(data2.T, file = "seconddataset.txt",row.name=FALSE)
+write.table(data2.T, file = "tidydataset.txt",row.name=FALSE)
 
